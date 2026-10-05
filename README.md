@@ -675,29 +675,6 @@ The helper writes its local `roi.data` but does not return it to the primary fun
 
 A failed run may have left files in `<outdir>/tmp_roi`. Remove that temporary directory before retrying and update the code to use a unique, automatically cleaned temporary folder.
 
-## Suggested improvements
-
-Recommended priorities for a production-quality revision:
-
-1. Match the primary function and filename.
-2. Use `dicomContours` or a separately validated RTSTRUCT parser.
-3. Select the referenced series using DICOM UIDs rather than a manually supplied unfiltered folder.
-4. Discover extensionless and nested DICOM objects safely.
-5. Read metadata before pixels and exclude non-image SOP classes.
-6. Avoid loading image pixels unless overlay QA or intensity analysis is requested.
-7. Validate Frame of Reference, Series Instance UID, dimensions, orientation, origin, and spacing across all slices.
-8. Implement the DICOM orientation-aware patient-to-pixel affine transform for the matched slice.
-9. Sort slices by image position projected onto the orientation-derived slice normal.
-10. Reject unmatched SOP Instance UIDs instead of writing position zero.
-11. Validate `ContourGeometricType` and support multiple components and holes.
-12. Include ROI number and contour index in every filename.
-13. Sanitize and deduplicate structure filenames.
-14. Return patient and pixel coordinates in `roi` as documented.
-15. Use a unique temporary directory with `onCleanup`.
-16. Write an audit manifest containing input/output names, UIDs, slice mappings, polygon counts, geometry, warnings, and checksums.
-17. Add automated tests using synthetic axial, oblique, multi-component, and malformed datasets.
-18. Export or open the image stack in the same verified order used for ROI positioning.
-
 ## Privacy and clinical safety
 
 DICOM metadata can contain protected health information. This script keeps full image and RTSTRUCT metadata in memory and prints RTSTRUCT sequence content to the MATLAB Command Window.
