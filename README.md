@@ -701,4 +701,4 @@ DICOM metadata can contain protected health information. This script keeps full 
 
 ## License
 
-No license is declared in the attached MATLAB source. Add a `LICENSE` file before redistribution and confirm the applicable terms for any bundled ImageJ JAR or sample DICOM data.
+GNU GPL 3.0 License
